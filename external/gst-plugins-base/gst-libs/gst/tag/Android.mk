@@ -1,0 +1,36 @@
+LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES:= 	\
+	gstvorbistag.c 	\
+	gstid3tag.c 	\
+        gstxmptag.c     \
+        gstexiftag.c    \
+        lang.c          \
+	tags.c 		\
+	gsttagdemux.c   \
+        gsttageditingprivate.c \
+
+LOCAL_SHARED_LIBRARIES := 	\
+	libgstreamer-0.10 	\
+	libgstbase-0.10		\
+	libglib-2.0		\
+	libgthread-2.0		\
+	libgmodule-2.0		\
+	libgobject-2.0
+
+LOCAL_MODULE:= libgsttag-$(GST_MAJORMINOR)
+
+LOCAL_C_INCLUDES := 				\
+	$(LOCAL_PATH)				\
+	$(GST_PLUGINS_BASE_TOP)			\
+	$(GST_PLUGINS_BASE_TOP)/android		\
+	$(GST_PLUGINS_BASE_TOP)/gst-libs	\
+	$(LOCAL_PATH)/./../audio/android	\
+	$(GST_PLUGINS_BASE_DEP_INCLUDES)
+
+LOCAL_CFLAGS := \
+	-DHAVE_CONFIG_H	
+
+include $(BUILD_SHARED_LIBRARY)
